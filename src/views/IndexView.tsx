@@ -1,6 +1,6 @@
 import {Form, notification} from "antd";
 import TextArea from "antd/es/input/TextArea";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Title from "antd/es/typography/Title";
 import {IJSONValidator, JSONValidator} from "../layers/JSONValidator";
 
@@ -9,8 +9,8 @@ export interface IIndexView {
 }
 
 export const IndexView = ({}: IIndexView) => {
-    const [rawJSON, setRawJSON] = useState<string>(localStorage.getItem('rawJSON') || ``);
-    const [api, contextHolder] = notification.useNotification();
+    const [rawJSON, setRawJSON] = useState<IJSONValidator['message']>(localStorage.getItem('rawJSON') || ``);
+    const [snackbar, contextHolder] = notification.useNotification();
 
     const openNotification = (message: IJSONValidator['message'], severity: IJSONValidator['severity']) => {
         let title;
@@ -29,7 +29,7 @@ export const IndexView = ({}: IIndexView) => {
                 break;
             }
         }
-        api[severity]({
+        snackbar[severity]({
             message: `${title}`,
             description: `${message}`,
             placement: "topRight",

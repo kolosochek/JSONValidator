@@ -19,17 +19,14 @@ export class JSONValidator {
     ) {
     }
 
-    reload() {
-        this.severity = 'error'
-        this.message = `Unexpected error`
-        this.isValid = false
-    }
     validate(rawJSON: IJSONValidator["rawJSON"]): boolean {
         // nothing to validate, early return
         if (!rawJSON) return false
 
-        // clear
-        this.reload()
+        // initial set
+        this.severity = 'error'
+        this.message = `Unexpected error`
+        this.isValid = false
 
         // check teh minLength
         if (rawJSON.length >= 3) {
@@ -44,7 +41,7 @@ export class JSONValidator {
                 console.log(this.resultJSON);
             } catch (error) {
                 // error
-                this.message = error
+                this.message = `${error}`
                 this.severity = 'error'
                 // debug
                 console.error(`Can't parse given json, reason: ${error},\n input value is ${rawJSON}`)
