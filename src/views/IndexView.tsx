@@ -36,7 +36,7 @@ export const IndexView = ({}: IIndexView) => {
         });
     };
 
-    const validateJSON = (value) => {
+    const validateJSON = (value: IJSONValidator["message"]) => {
         // update the state
         setRawJSON(value)
         // save input to the localStorage
