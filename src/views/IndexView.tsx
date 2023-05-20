@@ -9,7 +9,7 @@ export interface IIndexView {
 }
 
 export const IndexView = ({}: IIndexView) => {
-    const [rawJSON, setRawJSON] = useState<string>("");
+    const [rawJSON, setRawJSON] = useState<string>(localStorage.getItem('rawJSON') || ``);
     const [api, contextHolder] = notification.useNotification();
 
     const openNotification = (message: IJSONValidator['message'], severity: IJSONValidator['severity']) => {
@@ -37,8 +37,10 @@ export const IndexView = ({}: IIndexView) => {
     };
 
     const validateJSON = (value) => {
-        //
+        // update the state
         setRawJSON(value)
+        // save input to the localStorage
+        localStorage.setItem('rawJSON', value)
         // check JSON
         validator.validate(value)
         // set UI result
