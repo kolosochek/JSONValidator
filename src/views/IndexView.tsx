@@ -4,7 +4,7 @@ import {TextareaJson} from "../components/TextareaJSON/TextareaJSON";
 
 export const IndexView = () => {
     return (
-        <section className="b-view-container">
+        <section className="b-index-view-wrapper">
             <Title level={1}>JSONValidator</Title>
             <Form>
                 <Title level={3}>Enter JSON:</Title>

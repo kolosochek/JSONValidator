@@ -9,10 +9,10 @@ export const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<PageContainer />} >
-                    <Route path="/" element={<IndexView />} />
+                <Route element={<PageContainer/>}>
+                    <Route path="/" element={<IndexView/>}/>
+                    <Route path="*" element={<Error404/>}/>
                 </Route>
-                <Route path="*" element={<Error404 />} />
             </Routes>
         </BrowserRouter>
     )
