@@ -9,22 +9,16 @@ export interface ILayout {
 
 export const PageContainer = ({}: ILayout) => {
     return (
-        <ConfigProvider
-            theme={{
-                components: {
-                    Layout: {
-                        minHeight: "100vh",
-                    }
-                }
-            }}
-        >
-            <Layout>
+            <Layout style={{
+                minHeight: "100vh",
+            }}>
                 <Header/>
-                <Content>
+                <Content style={{
+                    padding: "3em",
+                }}>
                     <Outlet/>
                 </Content>
                 <Footer/>
             </Layout>
-        </ConfigProvider>
     )
 }
