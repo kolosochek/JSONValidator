@@ -2,6 +2,8 @@ import {useState} from "react";
 import {notification} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import {IJSONValidator, JSONValidator} from "../../layers/JSONValidator";
+import {useDebounce} from "../../hooks/useDebounce";
+
 
 export interface ITextareaJson {
     validator?: JSONValidator
@@ -35,7 +37,7 @@ export const TextareaJson = ({validator = new JSONValidator()}: ITextareaJson) =
         });
     };
 
-    const validateJSON = (value: IJSONValidator["message"]) => {
+    const validateJSON = useDebounce((value: IJSONValidator["message"]) => {
         // update the state
         setRawJSON(value)
         // save input to the localStorage
@@ -44,7 +46,7 @@ export const TextareaJson = ({validator = new JSONValidator()}: ITextareaJson) =
         validator?.validate(value)
         // set UI result
         openNotification(validator!.message, validator!.severity)
-    }
+    }, 500)
 
 
     return (
@@ -52,7 +54,7 @@ export const TextareaJson = ({validator = new JSONValidator()}: ITextareaJson) =
             {contextHolder}
             <TextArea
                 rows={10}
-                onChange={e => validateJSON(e.target!.value)}
+                onChange={(e) => {validateJSON(`${e.target.value}`)}}
                 defaultValue={rawJSON}
             />
         </>
